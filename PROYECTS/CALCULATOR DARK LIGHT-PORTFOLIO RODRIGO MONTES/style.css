@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Tektur&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    transition: 0.3s;
+    font-family: Tektur;
+}
+
+:root,
+:root.dark {
+    --primary-bg: #22252d;
+    --color-fg: #f8f8f8;
+    --secondary-bg: #292d36;
+    --buttons-bg: #272b33;
+}
+
+:root.light {
+    --primary-bg: #fff;
+    --color-fg: #292d36;
+    --secondary-bg: #f9f9f9;
+    --buttons-bg: #f7f7f7;
+}
+
+.dark_mode .light {
+    color: #fff;
+}
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra horizontalmente */
+    justify-content: center; /* Centra verticalmente */
+    text-align: center; /* Centra el texto horizontalmente */
+    padding: 20px; /* Añade un espacio alrededor del contenedor */
+}
+
+h1 {
+    margin-bottom: 20px; /* Agrega espacio entre el título y la calculadora */
+}
+
+body {
+    background: rgb(238, 174, 202, 1);
+    background: radial-gradient(circle, rgb(238, 174, 202, 1) 0%, rgba(148, 187, 233, 1) 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-bg);
+    width: 300px;
+    border-radius: 20px;
+    padding-top: 20px;
+    box-shadow: 0 0 20px 0 var(--secondary-bg);
+}
+
+.dark_mode {
+    margin: 4px auto;
+    background: var(--buttons-bg);
+    padding: 4px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dark_mode .dark,
+.dark_mode .light {
+    font-size: 1rem;
+    columns: var(--color-fg);
+    margin: 2px 8px;
+    cursor: pointer;
+}
+
+.resultBox {
+    width: 100%;
+    height: 80px;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.resultBox input {
+    text-align: right;
+    width: 80%;
+    padding: 3px 10px;
+    background: var(--primary-bg);
+    border: 0;
+    color: var(--color-fg);
+    cursor: default;
+}
+
+.resultBox input[name="expression"] {
+    letter-spacing: 0.2em;
+}
+
+.resultBox input[name="result"] {
+    font-size: 1.8em;
+    font-weight: bold;
+    padding: 4px 10px;
+    letter-spacing: 0.1em;
+}
+
+.buttons {
+    width: calc(100% - 20px);
+    padding: 20px 10px;
+    padding-bottom: 30px;
+    border-radius: 20px;
+}
+
+.buttons div {
+    display: flex;
+    justify-content: space-around;
+    margin: 8px auto;
+}
+
+.buttons div input {
+    color: var(--color-fg);
+    background: var(--buttons-bg);
+    border: 0;
+    width: 60px;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.fnkeys {
+    color: #26fdd6 !important;
+}
+
+.operator {
+    color: #f47a7a !important;
+}
+
+.equal {
+    width: 130px !important;
+}
+
+@media screen and (max-width: 600px) {
+    .container {
+        width: 90%;
+    }
+}

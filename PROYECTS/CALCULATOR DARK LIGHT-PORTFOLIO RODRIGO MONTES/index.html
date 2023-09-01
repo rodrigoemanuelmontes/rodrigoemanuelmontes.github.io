@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Tektur&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="style.css">
+    <title>Calculator App</title>
+</head>
+
+<body>
+    <div class="calculator-container">
+        <h1>Calculator App</h1>
+    <div class="container">
+        <div class="dark_mode">
+            <span class="dark">&#9790;</span>
+            <span class="light">&#9728;</span>
+        </div>
+        <form>
+            <div class="resultBox">
+                <input type="text" name="expression" readonly>
+                <input type="text" name="result" readonly>
+            </div>
+
+            <div class="buttons">
+                <div class="button">
+                    <input type="button" value="AC" class="fnkeys" onclick="clearAll()">
+                    <input type="button" value="←" class="fnkeys" onclick="backspace()">
+                    <input type="button" value="/" class="operator" onclick="append('/')">
+                    <input type="button" value="*" class="operator" onclick="append('*')">
+                </div>
+
+                <div class="button">
+                    <input type="button" value="7" onclick="append('7')">
+                    <input type="button" value="8" onclick="append('8')">
+                    <input type="button" value="9" onclick="append('9')">
+                    <input type="button" value="-" class="operator" onclick="append('-')">
+                </div>
+
+                <div class="button">
+                    <input type="button" value="4" onclick="append('4')">
+                    <input type="button" value="5" onclick="append('5')">
+                    <input type="button" value="6" onclick="append('6')">
+                    <input type="button" value="+" class="operator" onclick="append('+')">
+                </div>
+
+                <div class="button">
+                    <input type="button" value="1" onclick="append('1')">
+                    <input type="button" value="2" onclick="append('2')">
+                    <input type="button" value="3" onclick="append('3')">
+                    <input type="button" value="." class="operator" onclick="append('.')">
+                </div>
+
+                <div class="button">
+                    <input type="button" value=".00" onclick="append('.00')">
+                    <input type="button" value="0" onclick="append('0')">
+                    <input type="button" value="=" class="operator equal" onclick="calculateResult()">
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+<script>
+    const darkBtn = document.querySelector('.dark');
+    const lightBtn = document.querySelector('.light');
+    darkBtn.style = "opacity: 0.1";
+
+    darkBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+
+        window.localStorage.setItem('mode', 'dark');
+
+        darkBtn.style = "opacity: 0.1";
+        lightBtn.style = "opacity: 1";
+    });
+
+    lightBtn.addEventListener('click', () => {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+
+        window.localStorage.setItem('mode', 'light');
+
+        darkBtn.style = "opacity: 1";
+        lightBtn.style = "opacity: 0.1";
+    });
+
+    const mode = window.localStorage.getItem('mode');
+    if (mode == 'dark') {
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        darkBtn.style = "opacity: 0.1";
+        lightBtn.style = "opacity: 1";
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        darkBtn.style = "opacity: 1";
+        lightBtn.style = "opacity: 0.1";
+    }
+
+    let result = 0; // Variable para almacenar el resultado
+    let currentExpression = ''; // Variable para la expresión actual
+
+    function append(value) {
+        const expressionInput = document.getElementsByName("expression")[0];
+        const resultInput = document.getElementsByName("result")[0];
+        
+        if (resultInput.value !== '') {
+            currentExpression = resultInput.value + value;
+            resultInput.value = '';
+        } else {
+            currentExpression += value;
+        }
+        
+        expressionInput.value = currentExpression;
+    }
+
+    function clearAll() {
+        const expressionInput = document.getElementsByName("expression")[0];
+        const resultInput = document.getElementsByName("result")[0];
+        expressionInput.value = '';
+        resultInput.value = '';
+        currentExpression = '';
+    }
+
+    function backspace() {
+        const expressionInput = document.getElementsByName("expression")[0];
+        const resultInput = document.getElementsByName("result")[0];
+        if (resultInput.value !== '') {
+            resultInput.value = '';
+        } else {
+            currentExpression = currentExpression.slice(0, -1);
+            expressionInput.value = currentExpression;
+        }
+    }
+
+    function calculateResult() {
+        try {
+            const expressionInput = document.getElementsByName("expression")[0];
+            const resultInput = document.getElementsByName("result")[0];
+            const expression = currentExpression;
+
+            if (expression !== "") {
+                // Use eval() only if the expression contains valid mathematical operators
+                if (/^[0-9+\-*/. ]+$/.test(expression)) {
+                    result = eval(expression);
+                    resultInput.value = result;
+                } else {
+                    alert("Expresión inválida.");
+                }
+            }
+        } catch (error) {
+            alert("Error en la expresión.");
+        }
+    }
+</script>
+
+</html>
