@@ -30,7 +30,7 @@ Podés ver el portfolio en línea en:
 Si te interesa aportar o usar este portfolio como base para el tuyo:
 
 1. Forkeá este repo.
-2. Clonalo: `git clone https://github.com/tuusuario/tu-repo.git`
+2. Clonalo: `git clone https://github.com/rodrigoemanuelmontes/rodrigoemanuelmontes.github.io`
 3. Hacé tus cambios.
 4. Enviá un pull request.
 
